@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="#ffffff">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/counter"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="0px"
+            android:textColor="#000000"  />
+        
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Type here:" 
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/entry"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/label"
+            android:background="@android:drawable/editbox_background"
+            android:focusable="false" />
+        
+        <LinearLayout
+	       android:layout_width="fill_parent"
+	       android:layout_height="wrap_content"
+	       android:orientation="horizontal" >
+	       
+		<Button
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:onClick="valid"
+            android:text="Clear" />
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:onClick="clear"
+            android:text="OK" />
+        
+        </LinearLayout>
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="34dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/lettre1"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_weight="1"
+            android:background="#cccccc"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:onClick="onClick"
+            android:text="red"
+            android:textColor="#000000" 
+            />
+
+        <TextView
+            android:id="@+id/lettre2"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:onClick="onClick"
+            android:text="red"
+            android:textColor="#000000"  />
+
+        <TextView
+            android:id="@+id/lettre3"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_weight="1"
+            android:background="#cccccc"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:onClick="onClick"
+            android:text="red"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/lettre4"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:onClick="onClick"
+            android:text="red"
+            android:textColor="#000000"  />
+
+        <TextView
+            android:id="@+id/lettre5"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_weight="1"
+            android:background="#cccccc"
+            android:gravity="center_horizontal"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:text="red"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/lettre6"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:text="red" 
+            android:textColor="#000000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+        
+        
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Texte OK" 
+            android:textColor="#000000"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             >
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                >
+                 <TextView
+		            android:layout_column="1"
+		            android:text="Text 1"
+		            android:textColor="#000000" />
+                
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
