@@ -12,23 +12,42 @@ public class MotsUtil {
 	private static String charsCons = "BCDFGHJKLMNPQRSTVWXZ"; 
 	private static String charsVoy = "AEIOUY"; 
 	
-	public static String[] generateRandomChar(){
+	/**
+	 * Génère une chaine de caractère aléatoire de 6 caractères
+	 * nbVoy voyelles, nbCons consonnes
+	 * 
+	 */
+	public static String[] generateConsAndVoyRandomChar(int nbCons, int nbVoy){
 		
 		String[] randomChar = new String[6];
         
-        for(int i = 0 ; i <2; i++){
+        for(int i = 0 ; i < (nbVoy - 1); i++){
         	randomChar[i] = "" + generateVoy();
         }
-        for(int i = 2 ; i <6; i++){
+        for(int i = 2 ; i <(nbCons - 1); i++){
         	randomChar[i] = "" + generateCons();
         }
-		/*for(int i = 0 ; i <6; i++){
-        	randomChar[i] = "" + generate();
-        }*/
+
 
 		
         return randomChar;
 	}
+	/**
+	 * Génère une chaine de caractère aléatoire de 6 caractères
+	 * nbVoy voyelles, nbCons consonnes
+	 * 
+	 */
+	public static String[] generateRandomChar(){
+		
+		String[] randomChar = new String[6];
+		
+		for(int i = 0 ; i <6; i++){
+			randomChar[i] = "" + generate();
+    	}
+		
+		 return randomChar;
+	}
+	
 	
     private static char generateVoy() {
         int i = (int) Math.floor(Math.random() * (charsVoy.length() -1));
@@ -42,7 +61,15 @@ public class MotsUtil {
         int i = (int) Math.floor(Math.random() * (chars.length() -1));
         return chars.charAt(i);
    }
-    
+    /**
+     * Permet d'obtenir une chaine de caractère concatenant le nombre de lettres dans l'ordre alphabétique
+     * 
+     * ex : AERRTB retourne
+     * 1A1B1E2R1T
+     * 
+     * @param mot
+     * @return String
+     */
 	public static String countByLetters(String mot){
 		
 		String res = "";
@@ -76,6 +103,13 @@ public class MotsUtil {
 		
 	}
 	
+	/**
+	 * Permet de retourner toutes les combinaisons d'une chaine de type "1A1B1C1D1E1F" retourné par la méthode
+	 *  countByLetters(String mot)
+	 *  
+	 * @param randomizedLetters
+	 * @return
+	 */
 	public static List<String> extractAllRandomizedPossibilities(String randomizedLetters){
 		
 		List<String> res = new ArrayList<String>();
@@ -179,19 +213,19 @@ public class MotsUtil {
 	public static String replaceChar(String mot){
 		
 		mot = mot.replace('é', 'e')
-		.replace('è', 'e')
-		.replace('ë', 'e')
-		.replace('ê', 'e')
-		.replace('ï', 'i')
-		.replace('î', 'i')
-		.replace('à', 'a')
-		.replace('ä', 'a')
-		.replace('â', 'a')
-		//mot = mot.replace('à', 'a');
-		.replace('û', 'u')
-		.replace('ü', 'u')
-		.replace('ö', 'o')
-		.replace('ô', 'o');
+				.replace('é', 'e')
+				.replace('è', 'e')
+				.replace('ê', 'e')
+				.replace('ë', 'e')
+				.replace('ï', 'i')
+				.replace('î', 'i')
+				.replace('à', 'a')
+				.replace('â', 'a')
+				.replace('ä', 'a')
+				.replace('û', 'u')
+				.replace('ü', 'u')
+				.replace('ô', 'o')
+				.replace('ö', 'o');
 		
 		return mot.toUpperCase();
 	}
