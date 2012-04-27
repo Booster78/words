@@ -21,11 +21,11 @@ public class MotsUtil {
 		
 		String[] randomChar = new String[6];
         
-        for(int i = 0 ; i < (nbVoy - 1); i++){
+        for(int i = 0 ; i < nbVoy; i++){
         	randomChar[i] = "" + generateVoy();
         }
-        for(int i = 2 ; i <(nbCons - 1); i++){
-        	randomChar[i] = "" + generateCons();
+        for(int i = 0 ; i < nbCons; i++){
+        	randomChar[i + nbVoy] = "" + generateCons();
         }
 
 
