@@ -54,11 +54,7 @@ public class MotsRestServlet {
         long temps = dateFin.getTime() - date.getTime();
         		
         System.out.println("Find de recherche en " + temps + " ms");
-        /*ResponseBuilder responseBuilder;
-        responseBuilder = Response.status(Status.OK);
-        responseBuilder = responseBuilder.type(MediaType);
-        responseBuilder = responseBuilder.entity("<body>Hello world!!</body>");
-        Response response =  responseBuilder.build();*/
+   
         String res = "<html><body>Hello!!<br>" +
         		"<b>Votre choix de lettre :</b> ";
 		    	for(String lettre : randomChar){
