@@ -20,7 +20,7 @@ public class FileGenerator {
 		try{
 			writer =  new BufferedWriter(new FileWriter("parties-mots.txt"));
 			int i = 1;
-			int nbResDemandes = 3;
+			int nbResDemandes = 5;
 			while(i <= nbResDemandes){
 				String[] randomChar = MotsUtil.generateConsAndVoyRandomChar(4, 2);//generateRandomChar();
 				String res = null;

@@ -2,10 +2,10 @@ package fr.boost.entity;
 
 public class Mot {
 	private String id;
-	private String mot;
+	private String values;
 	
-	public String getMot() {
-		return mot;
+	public String getValues() {
+		return values;
 	}
 	public String getId() {
 		return id;
@@ -13,8 +13,8 @@ public class Mot {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public void setMot(String mot) {
-		this.mot = mot;
+	public void setValues(String mot) {
+		this.values = mot;
 	}
 	
 	
