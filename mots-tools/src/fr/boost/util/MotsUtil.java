@@ -32,6 +32,15 @@ public class MotsUtil {
 		
         return randomChar;
 	}
+	
+	public static List<String> converteGenerateCharsToList(String randomChars){
+		List<String> str = new ArrayList<String>();
+		for(int i = 0; i < randomChars.length(); i = i + 2){
+			str.add(String.valueOf(randomChars.charAt(i)) + String.valueOf(randomChars.charAt(i+1)));
+		}
+		return str;
+		
+	}
 	/**
 	 * Génère une chaine de caractère aléatoire de 6 caractères
 	 * nbVoy voyelles, nbCons consonnes
@@ -70,7 +79,7 @@ public class MotsUtil {
      * @param mot
      * @return String
      */
-	public static String countByLetters(String mot){
+	public static String countByLetters(String mot, boolean oneByone){
 		
 		String res = "";
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -89,10 +98,13 @@ public class MotsUtil {
 			
 			String currentLetter = String.valueOf(chars.charAt(i));
 			if(map.containsKey(currentLetter)){
-				for(int p = 0; p< map.get(currentLetter); p++){
-					res += "1" + currentLetter;
+				if(oneByone){
+					for(int p = 0; p< map.get(currentLetter); p++){
+						res += "1" + currentLetter;
+					}
+				} else {
+					res += map.get(currentLetter) + currentLetter;
 				}
-				
 			}
 			
 			
@@ -119,133 +131,19 @@ public class MotsUtil {
 		
 	}
 	
-	/**
-	 * Permet de retourner toutes les combinaisons d'une chaine de type "1A1B1C1D1E1F" retourné par la méthode
-	 *  countByLetters(String mot)
-	 *  
-	 * @param randomizedLetters
-	 * @return
-	 */
-	public static List<String> extractAllRandomizedPossibilities(String randomizedLetters){
+	
+	public static int countLettersFromMotId(String motId){
 		
-		List<String> res = new ArrayList<String>();
-		
-		String[] split = new String[randomizedLetters.length() / 2];
-		int j = 0;
-		for(int i = 0 ; i < randomizedLetters.length(); i = i+2){
-			split[j] = randomizedLetters.substring(i, i+2);
-			j++;
+		int sum = 0;
+		for(int i = 0; i < motId.length(); i= i + 2){
+			int nbLetters = Integer.valueOf(String.valueOf(motId.charAt(i)));
+			sum = sum + nbLetters;			
 		}
 		
-		int splitLength = split.length;// - 2;
+		return sum;
 		
-		for(int k=0; k<splitLength; k++){
-			
-			for(int i = k + 1; i<splitLength; i++){
-					res.add(split[k] + split[i]);
-				if(i < 5 ){
-					res.add(split[k] + split[i] + split[i+1]);
-				}
-				if(i < 4 ){
-					res.add(split[k] + split[i] + split[i+1] + split[i+2]);
-				}
-				if(i < 3 ){
-					res.add(split[k] + split[i] + split[i+1] + split[i+2] + split[i+3]);
-				}
-				if(i < 2 ){
-					res.add(split[k] + split[i] + split[i+1] + split[i+2] + split[i+3] + split[i+4]);
-				}
-			}
-			
-		}
-		
-		for(int k=0; k<splitLength; k++){
-			
-			for(int i = k + 3; i<splitLength; i++){
-					//res.add(split[k] + split[i]);
-				if(i < 6 ){
-					res.add(split[k] + split[k+1] + split[i]);
-				}
-				if(i < 5 ){
-					res.add(split[k] + split[k+1] + split[i] + split[i+1]);
-					
-				}
-				if(i< 4){
-					res.add(split[k] + split[k+1] + split[i] + split[i+1] + split[i+2]);
-				}	
-			}
-			
-		}		
-		
-		for(int k=0; k<splitLength; k++){
-			
-			for(int i = k + 2; i<splitLength; i++){
-					//res.add(split[k] + split[i]);
-				if(i < 4 ){
-					res.add(split[k] + split[i] + split[i + 2]);
-				}
-				if(i < 3 ){
-					res.add(split[k] + split[i] + split[i + 2] + split[i + 3]);
-				}
-			}
-			
-		}
-		
-		for(int k=0; k<splitLength; k++){
-			
-			for(int i = k + 3; i<splitLength; i++){
-					//res.add(split[k] + split[i]);
-				if(i < 4 ){
-					res.add(split[k] + split[k+1] + split[i] + split[i + 2]);
-				}
-			}
-			
-		}	
-		
-		for(int k=0; k<splitLength; k++){
-			
-			for(int i = k + 4; i<splitLength; i++){
-					//res.add(split[k] + split[i]);
-				if(i < 5 ){
-					res.add(split[k] + split[k+1] + split[k+2] + split[i] );
-					res.add(split[k] + split[k+1] + split[k+2] + split[i] + split[i +1]);
-				}
-			}
-			
-		}
-		for(int k=0; k<splitLength; k++){
-			
-			for(int i = k + 5; i<splitLength; i++){
-					//res.add(split[k] + split[i]);
-				if(i < 6 ){
-					res.add(split[k] + split[k+1] + split[k+2] + split[k+3] + split[i]);
-				}
-			}
-			
-		}
-		
-		return res;
 		
 	}
 	
-	public static String replaceChar(String mot){
-		
-		mot = mot.replace('é', 'e')
-				.replace('é', 'e')
-				.replace('è', 'e')
-				.replace('ê', 'e')
-				.replace('ë', 'e')
-				.replace('ï', 'i')
-				.replace('î', 'i')
-				.replace('à', 'a')
-				.replace('â', 'a')
-				.replace('ä', 'a')
-				.replace('û', 'u')
-				.replace('ü', 'u')
-				.replace('ô', 'o')
-				.replace('ö', 'o');
-		
-		return mot.toUpperCase();
-	}
 	
 }

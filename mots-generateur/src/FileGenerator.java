@@ -3,8 +3,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import fr.boost.util.MotsUtil;
@@ -20,29 +22,87 @@ public class FileGenerator {
 		try{
 			writer =  new BufferedWriter(new FileWriter("parties-mots.txt"));
 			int i = 1;
-			int nbResDemandes = 5;
+			int nbResDemandes = 50;
+	
+			System.out.println("loading map");
+			 String randomStringLetters = "";
+			 Map<String, List<String>> map = new HashMap<String, List<String>>();
+			for(String mot : fileMots){
+				randomStringLetters = MotsUtil.countByLetters(mot.toUpperCase(),false);
+				if(!map.containsKey(randomStringLetters)){
+					List<String> mots = new ArrayList<String>();
+					mots.add(mot);
+					map.put(randomStringLetters,mots);
+				} else {
+					map.get(randomStringLetters).add(mot);
+				}
+								
+			}
+			
+			System.out.println("map size " + map.keySet().size());
+			
+			System.out.println("writing file...");
+			
+		
+			
 			while(i <= nbResDemandes){
 				String[] randomChar = MotsUtil.generateConsAndVoyRandomChar(4, 2);//generateRandomChar();
-				String res = null;
-		        String randomString = "";
+		        String generateChars = "";
 		        for(String c : randomChar){
-		        	randomString += c;
+		        	generateChars += c;
+		        }
+		        		        
+		        String randomGenerateChars = MotsUtil.countByLetters(generateChars, false);
+		        
+		        //list 1A 1B 1I générés aléatoirement
+		        List<String> generateCharsList =  MotsUtil.converteGenerateCharsToList(randomGenerateChars);
+		        List<String> outPutWord = new ArrayList<String>();
+		        System.out.println("lettres generees : " + generateCharsList);
+		        //On parcours la map des mots français
+		        for(String randomStringLettersFound : map.keySet()){
+		        	//Calcul des 1B, 1C, 1I... du mot du dictionnaire		        	
+		        	List<String> dicoCharsList = MotsUtil.converteGenerateCharsToList(randomStringLettersFound);
+		        	//Est-ce que ces 1B, 1C ... matchent avec les 1A, 1B... générés aléatoirement ?
+	
+		        	//parcours des 1B, 1C... du mot du dictionnaire
+		        	Iterator itDico = dicoCharsList.iterator();
+		        	boolean letterOK = false;
+		        	do{
+		        		String dico = (String)itDico.next();
+		        		letterOK = false;
+		        		//par cours de 1B, 1C... généré
+		        		for(String gen : generateCharsList){
+		        			if(gen.charAt(1) == (dico.charAt(1)) && Integer.valueOf(dico.substring(0,1)) <= Integer.valueOf(gen.substring(0,1))){
+		        				letterOK = true;
+			        			break;
+		        			}
+		        		}
+		        		
+		        	} while(itDico.hasNext() && letterOK);
+		        	
+		        	 
+		        	//
+		        	if(letterOK){
+		        		outPutWord.addAll(map.get(randomStringLettersFound));
+		        	}
+		        			        	
 		        }
 		        
-		        String randomStringLetters = MotsUtil.countByLetters(randomString);
-		        res = getMotsFromRandomStringLetters(randomStringLetters);
-		        
-				if(res != null){
-					System.out.println("Pogressions =" + i + "/"+nbResDemandes);
-					System.out.println("Entrée = " + randomStringLetters);
-					System.out.println("Résultat = " + res);
-					writer.write(randomStringLetters + "-" + res + "\n");
-					i++;
-				} else {
-					//System.out.println("0 résultat pour : " + randomString);
+		        writer.write(randomGenerateChars + "-");
+				Iterator<String> it = outPutWord.iterator();
+				while(it.hasNext()) {
+					writer.write(((String)it.next()).toUpperCase());
+					if(it.hasNext()){
+						writer.write(",");
+					}
 				}
+				writer.write("\n");
+				
+				i++;
 				
 			}
+			
+			System.out.println("end file...");
 		} catch(Exception e){
 			if(writer != null){
 				try{
@@ -51,6 +111,8 @@ public class FileGenerator {
 					e1.printStackTrace();
 				}
 			}
+			e.printStackTrace();
+			
 		}finally{
 			if(writer != null){
 				try{
@@ -62,47 +124,7 @@ public class FileGenerator {
 		}
 	}
 
-	
-	private static String getMotsFromRandomStringLetters(String randomStringLetters){
-		
-		List<String> res = new ArrayList<String>();
-        List<String> allRandomizedPossibilities = MotsUtil.extractAllRandomizedPossibilities(randomStringLetters);
-	
-		for(String mot : fileMots){
-			
-		    if(mot.length() <= 8 && !mot.contains("-")){
-		    	 mot = MotsUtil.replaceChar(mot);
-		    	 String c = MotsUtil.countByLetters(mot);
-		    	 
-		    	 if(c.length() > 4 && allRandomizedPossibilities.contains(c) && !res.contains(mot)){
-		    		 res.add(mot);
-		    	 }
-		    	
-		    	 
-		    }
-		   
-		}
-		int nbResult = res.size();
-		if(nbResult > 8){
-			
-			int maxLength = 0;
-					
-			for(String r : res){
-				if(r.length() > maxLength){
-					maxLength = r.length();
-				}
-			}
-			if(maxLength >= 6){
-				return buildResult(res);
-			}
-			
-		
-		}
 
-		
-		return null;
-		
-	}
 	
 	
 	private static List<String> loadFile(){
@@ -122,23 +144,11 @@ public class FileGenerator {
 			mots.add(scanner.nextLine());
 		}
 		
+		scanner.close();
+		
 		System.out.println("... Fin Chargement fichier");
 		
 		return mots;
-		
-	}
-	private static String buildResult(List<String> res){
-		
-		String r = "";
-		Iterator i = res.iterator();
-		while(i.hasNext()){
-			r += i.next();
-			if(i.hasNext()){
-				r+=",";
-			}
-			
-		}
-		return r;
 		
 	}
 }

@@ -25,7 +25,8 @@ public final class R {
         public static final int lettre5=0x7f050009;
         public static final int lettre6=0x7f05000a;
         public static final int ok=0x7f050004;
-        public static final int tableRow1=0x7f05000b;
+        public static final int tableRow1=0x7f05000c;
+        public static final int tableTrouve=0x7f05000b;
     }
     public static final class layout {
         public static final int main=0x7f030000;

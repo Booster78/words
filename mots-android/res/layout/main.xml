@@ -47,14 +47,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:onClick="valid"
+            android:onClick="clear"
             android:text="Clear" />
         <Button
             android:id="@+id/ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:onClick="clear"
+            android:onClick="valid"
             android:text="OK" />
         
         </LinearLayout>
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50px"
             android:layout_weight="1"
-            android:background="#cccccc"
+            android:background="#bbee"
             android:clickable="true"
             android:gravity="center_horizontal"
             android:onClick="onClick"
@@ -84,6 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50px"
             android:layout_weight="1"
+            android:background="#cccccc"
             android:clickable="true"
             android:gravity="center_horizontal"
             android:onClick="onClick"
@@ -95,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50px"
             android:layout_weight="1"
-            android:background="#cccccc"
+            android:background="#bbee"
             android:clickable="true"
             android:gravity="center_horizontal"
             android:onClick="onClick"
@@ -104,6 +105,7 @@
 
         <TextView
             android:id="@+id/lettre4"
+            android:background="#cccccc"
             android:layout_width="wrap_content"
             android:layout_height="50px"
             android:layout_weight="1"
@@ -118,9 +120,9 @@
             android:layout_width="wrap_content"
             android:layout_height="50px"
             android:layout_weight="1"
-            android:background="#cccccc"
-            android:gravity="center_horizontal"
+            android:background="#bbee"
             android:clickable="true"
+            android:gravity="center_horizontal"
             android:onClick="onClick"
             android:text="red"
             android:textColor="#000000" />
@@ -128,6 +130,7 @@
         <TextView
             android:id="@+id/lettre6"
             android:layout_width="wrap_content"
+            android:background="#cccccc"
             android:layout_height="50px"
             android:layout_weight="1"
             android:gravity="center_horizontal"
@@ -152,6 +155,7 @@
             android:textColor="#000000"/>
 
         <TableLayout
+            android:id="@+id/tableTrouve"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
              >
@@ -161,10 +165,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" 
                 >
-                 <TextView
-		            android:layout_column="1"
-		            android:text="Text 1"
-		            android:textColor="#000000" />
                 
             </TableRow>
 
