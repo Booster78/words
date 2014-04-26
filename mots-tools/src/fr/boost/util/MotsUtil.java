@@ -13,19 +13,21 @@ public class MotsUtil {
 	private static String charsVoy = "AEIOUY"; 
 	
 	/**
-	 * Génère une chaine de caractère aléatoire de 6 caractères
+	 * Génère une chaine de caractère aléatoire de X caractères
 	 * nbVoy voyelles, nbCons consonnes
 	 * 
 	 */
-	public static String[] generateConsAndVoyRandomChar(int nbCons, int nbVoy){
+	public static String[] generateConsAndVoyRandomChar(int nbLettres, int maxVoy, int minVoy){
 		
-		String[] randomChar = new String[6];
+		int nbVoyRandom =(int) (minVoy + Math.floor(Math.random() * (maxVoy - minVoy + 1)));
+		
+		String[] randomChar = new String[nbLettres];
         
-        for(int i = 0 ; i < nbVoy; i++){
+        for(int i = 0 ; i < nbVoyRandom; i++){
         	randomChar[i] = "" + generateVoy();
         }
-        for(int i = 0 ; i < nbCons; i++){
-        	randomChar[i + nbVoy] = "" + generateCons();
+        for(int i = 0 ; i < (nbLettres - nbVoyRandom); i++){
+        	randomChar[i + nbVoyRandom] = "" + generateCons();
         }
 
 
@@ -42,15 +44,15 @@ public class MotsUtil {
 		
 	}
 	/**
-	 * Génère une chaine de caractère aléatoire de 6 caractères
+	 * Génère une chaine de caractère aléatoire de X caractères
 	 * nbVoy voyelles, nbCons consonnes
 	 * 
 	 */
-	public static String[] generateRandomChar(){
+	public static String[] generateRandomChar(int nbChars){
 		
-		String[] randomChar = new String[6];
+		String[] randomChar = new String[nbChars];
 		
-		for(int i = 0 ; i <6; i++){
+		for(int i = 0 ; i <nbChars; i++){
 			randomChar[i] = "" + generate();
     	}
 		

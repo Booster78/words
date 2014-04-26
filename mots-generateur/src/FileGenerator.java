@@ -22,7 +22,8 @@ public class FileGenerator {
 		try{
 			writer =  new BufferedWriter(new FileWriter("parties-mots.txt"));
 			int i = 1;
-			int nbResDemandes = 50;
+			int nbResDemandes = 100;
+			int minMotsTrouves = 40;
 	
 			System.out.println("loading map");
 			 String randomStringLetters = "";
@@ -46,7 +47,7 @@ public class FileGenerator {
 		
 			
 			while(i <= nbResDemandes){
-				String[] randomChar = MotsUtil.generateConsAndVoyRandomChar(4, 2);//generateRandomChar();
+				String[] randomChar = MotsUtil.generateConsAndVoyRandomChar(9, 6,2);//generateRandomChar();
 		        String generateChars = "";
 		        for(String c : randomChar){
 		        	generateChars += c;
@@ -57,7 +58,7 @@ public class FileGenerator {
 		        //list 1A 1B 1I générés aléatoirement
 		        List<String> generateCharsList =  MotsUtil.converteGenerateCharsToList(randomGenerateChars);
 		        List<String> outPutWord = new ArrayList<String>();
-		        System.out.println("lettres generees : " + generateCharsList);
+		       
 		        //On parcours la map des mots français
 		        for(String randomStringLettersFound : map.keySet()){
 		        	//Calcul des 1B, 1C, 1I... du mot du dictionnaire		        	
@@ -87,18 +88,24 @@ public class FileGenerator {
 		        	}
 		        			        	
 		        }
-		        
-		        writer.write(randomGenerateChars + "-");
-				Iterator<String> it = outPutWord.iterator();
-				while(it.hasNext()) {
-					writer.write(((String)it.next()).toUpperCase());
-					if(it.hasNext()){
-						writer.write(",");
+		        if(outPutWord.size() > minMotsTrouves){
+		        	 System.out.println("lettres generees : " + randomGenerateChars + " | " + outPutWord.size() + " smots possibles ");
+			        writer.write(randomGenerateChars + "-");
+					Iterator<String> it = outPutWord.iterator();
+					while(it.hasNext()) {
+						writer.write(((String)it.next()).toUpperCase());
+						if(it.hasNext()){
+							writer.write(",");
+						}
 					}
-				}
-				writer.write("\n");
+					writer.write("\n");
+					i++;
+					
+					System.out.println(i + "/" + nbResDemandes);
+		        }
 				
-				i++;
+				
+				
 				
 			}
 			

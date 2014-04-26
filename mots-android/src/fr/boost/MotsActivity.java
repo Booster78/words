@@ -24,7 +24,7 @@ public class MotsActivity extends Activity {
     /** Called when the activity is first created. */
 	
 	private static List<String> fichierMot = null;
-	private static List<String> lettresSaisies =  new ArrayList<String>();
+	private static List<TextView> lettresSaisies =  new ArrayList<TextView>();
 	private DatabaseHelper mDbHelper = null;
 	private static Mot currentMot = null;
 	private static List<String> motsTrouves = new ArrayList<String>();
@@ -37,6 +37,10 @@ public class MotsActivity extends Activity {
 	private TextView txt4 = null;
 	private TextView txt5 = null;
 	private TextView txt6 = null;
+	private TextView txt7 = null;
+	private TextView txt8 = null;
+	private TextView txt9 = null;
+	private List<TextView> buttonTxt = new ArrayList<TextView>();
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,14 +55,26 @@ public class MotsActivity extends Activity {
         	//fichierMot = loadListeMots(mgr);
         }
         setContentView(R.layout.main);
-                
+        
         txt1 = ((TextView) findViewById(R.id.lettre1));
         txt2 = ((TextView) findViewById(R.id.lettre2));
         txt3 = ((TextView) findViewById(R.id.lettre3));
         txt4 = ((TextView) findViewById(R.id.lettre4));
         txt5 = ((TextView) findViewById(R.id.lettre5));
         txt6 = ((TextView) findViewById(R.id.lettre6));
+        txt7 = ((TextView) findViewById(R.id.lettre7));
+        txt8 = ((TextView) findViewById(R.id.lettre8));
+        txt9 = ((TextView) findViewById(R.id.lettre9));
         
+        buttonTxt.add(txt1);
+        buttonTxt.add(txt2);
+        buttonTxt.add(txt3);
+        buttonTxt.add(txt4);
+        buttonTxt.add(txt5);
+        buttonTxt.add(txt6);
+        buttonTxt.add(txt7);
+        buttonTxt.add(txt8);
+        buttonTxt.add(txt9);
        
         
         MyCount counter = new MyCount(60000,1000,  ((TextView) findViewById(R.id.counter)));
@@ -77,26 +93,10 @@ public class MotsActivity extends Activity {
         
         List<String> lettres = AndroidMotsUtil.getLettersFromMotId(currentMot.getId());
         
-        txt1.setText(lettres.get(0));
-        txt2.setText(lettres.get(1));
-        txt3.setText(lettres.get(2));
-        txt4.setText(lettres.get(3));
-        txt5.setText(lettres.get(4));
-        txt6.setText(lettres.get(5));
-        //List<String> allRandomizedPossibilities = MotsUtil.extractAllRandomizedPossibilities(randomString);
+        for(int i = 0; i< buttonTxt.size(); i++){
+        	buttonTxt.get(i).setText(lettres.get(i));
+        }
         
-       /*List<String> motsPossibles = new ArrayList<String>();
-        for(String mot : fichierMot){
-	        if(mot.length() <= 8 && !mot.contains("-")){
-		    	 mot = MotsUtil.replaceChar(mot);
-		    	 String c = MotsUtil.countByLetters(mot);
-		    	 
-		    	 if(c.length() > 4 && allRandomizedPossibilities.contains(c) && !motsPossibles.contains(mot)){
-		    		 motsPossibles.add(mot);
-		    		 System.out.println(mot);
-		    	 }
-	        }
-        }*/
     }
     
   
@@ -107,7 +107,7 @@ public class MotsActivity extends Activity {
 	    	currentViewClick.setTextColor(Color.WHITE);
 	    	EditText txt = (EditText)findViewById(R.id.entry);
 	    	txt.append(lettreSaisie);
-	    	lettresSaisies.add(lettreSaisie);
+	    	lettresSaisies.add(currentViewClick);
     	}
     } 
     
@@ -137,13 +137,10 @@ public class MotsActivity extends Activity {
     private void resetButtons(){
     	EditText txt = (EditText)findViewById(R.id.entry);
     	txt.setText("");
-    	lettresSaisies =  new ArrayList<String>();
-    	txt1.setTextColor(Color.BLACK);
-    	txt2.setTextColor(Color.BLACK);
-    	txt3.setTextColor(Color.BLACK);
-    	txt4.setTextColor(Color.BLACK);
-    	txt5.setTextColor(Color.BLACK);
-    	txt6.setTextColor(Color.BLACK);
+    	lettresSaisies =  new ArrayList<TextView>();
+    	 for(int i = 0; i< buttonTxt.size(); i++){
+         	buttonTxt.get(i).setTextColor(Color.BLACK);
+         }
     }
     private void initDB(AssetManager mgr){
     	
